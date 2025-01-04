@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+
+  Frontend:
+    build: ./Frontend
+    restart: always
+
+  Backend:
+    build: ./Backend
+    restart: always
+    depends_on:
+    - Postgres 
+
+  Postgres:
+    image: postgres:17
+    restart: always
