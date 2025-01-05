@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кооператив - Финансы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Финансовый учет кооператива</h1>
+    <div>
+        <h2>Члены кооператива</h2>
+        <table id="members-table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Размер пая</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Члены кооператива будут подгружены здесь -->
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2>Транзакции</h2>
+        <table id="transactions-table">
+            <thead>
+                <tr>
+                    <th>Тип</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Транзакции будут подгружены здесь -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // Получение данных членов кооператива
+        fetch('/api/members')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#members-table tbody');
+                data.forEach(member => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${member.name}</td><td>${member.share}</td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+
+        // Получение данных транзакций
+        fetch('/api/transactions')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#transactions-table tbody');
+                data.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${transaction.type}</td><td>${transaction.amount}</td>`;
+                    tableBody.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>
