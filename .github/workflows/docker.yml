@@ -22,13 +22,22 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push Docker image
+      - name: Build and push FrontEnd Docker image
         uses: docker/build-push-action@v5
         with:
           context: Frontend/
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKER_USERNAME }}/bukep-epr-frontend:latest
+
+      - name: Build and push BackEnd Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: Backend/
+          push: true
+          platforms: linux/amd64
+          tags: ${{ secrets.DOCKER_USERNAME }}/bukep-epr-backend:latest
+
 
       - name: Log out from Docker Hub
         run: docker logout
