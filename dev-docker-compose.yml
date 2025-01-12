@@ -2,7 +2,7 @@ version: '3.9'
 services:
 
   frontend:
-    image: hexqueller/bukep-epr-frontend:latest
+    build: ./Frontend
     restart: always
     ports:
       - "8080:8080"
@@ -10,7 +10,7 @@ services:
       - backend
 
   backend:
-    image: hexqueller/bukep-epr-backend:latest
+    build: ./Backend
     restart: always
     # depends_on:
     # - Postgres 
