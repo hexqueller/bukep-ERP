@@ -12,8 +12,11 @@ services:
   backend:
     build: ./Backend
     restart: always
-    # depends_on:
-    # - Postgres 
+
+  toolbox:
+    image: alpine/curl:8.10.0
+    restart: always
+    command: sleep infinity
 
   # postgres:
   #   image: postgres:17
