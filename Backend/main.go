@@ -18,5 +18,11 @@ func main() {
 		json.NewEncoder(w).Encode(response)
 	})
 
+	http.HandleFunc("/up", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		response := map[string]string{"status": "up"}
+		json.NewEncoder(w).Encode(response)
+	})
+
 	http.ListenAndServe(":8080", nil)
 }
