@@ -1,6 +1,20 @@
+import requests
 from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
+
+def backend_available():
+    try:
+        response = requests.get('http://backend:8080/up')
+        if response.status_code == 200 and response.json().get('status') == 'up':
+            print(f"Connected to Backend server")
+            return True
+        else:
+            print(f"Backend is not up. Status code: {response.status_code}, Response: {response.json()}")
+            return False
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to connect to backend: {e}")
+        return False
 
 @app.route('/')
 def index():
@@ -48,4 +62,7 @@ def get_report():
     return jsonify(report)
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0', port=8080)
+    if backend_available():
+        app.run(debug=True, host='0.0.0.0', port=8080)
+    else:
+        print("Backend is not available. Exiting...")
