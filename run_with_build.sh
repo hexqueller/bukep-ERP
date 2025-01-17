@@ -1,3 +1,3 @@
 #!/bin/bash
-
-docker-compose -f ./dev-docker-compose.yml up --build
+mkdir pgdata
+docker-compose -f ./dev-docker-compose-linux.yml up --build -d

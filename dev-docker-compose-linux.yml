@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+
+  frontend:
+    build: ./Frontend
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./Backend
+    restart: always
+
+  toolbox:
+    image: alpine/curl:8.10.0
+    restart: always
+    command: sleep infinity
+
+  postgres:
+    image: postgres:17
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: 1qaz!QAZ
+      POSTGRES_DB: bukep-epr

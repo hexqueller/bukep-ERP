@@ -18,6 +18,12 @@ services:
     restart: always
     command: sleep infinity
 
-  # postgres:
-  #   image: postgres:17
-  #   restart: always
+  postgres:
+    image: postgres:17
+    restart: always
+    volumes:
+      - .\pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: 1qaz!QAZ
+      POSTGRES_DB: bukep-epr

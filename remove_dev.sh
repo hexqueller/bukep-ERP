@@ -1,3 +1,3 @@
 #!/bin/bash
-
-docker-compose -f ./dev-docker-compose.yml down -v
+rm -rf pgdata
+docker-compose -f ./dev-docker-compose-linux.yml down -v
