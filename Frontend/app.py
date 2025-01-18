@@ -63,6 +63,6 @@ def get_report():
 
 if __name__ == '__main__':
     if backend_available():
-        app.run(debug=True, host='0.0.0.0', port=8080)
+        app.run(debug=True, host='0.0.0.0')
     else:
         print("Backend is not available. Exiting...")
